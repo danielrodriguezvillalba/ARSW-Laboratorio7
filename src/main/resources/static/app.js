@@ -1,5 +1,5 @@
 var app = (function () {
-
+    var idBlueprint;
     class Point{
         constructor(x,y){
             this.x=x;
@@ -37,10 +37,10 @@ var app = (function () {
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/newpoint', function (eventbody) {
+            stompClient.subscribe('/topic/newpoint.'+idBlueprint, function (eventbody) {
+
                 var theObject = JSON.parse(eventbody.body);
                 var punto = new Point(theObject.x, theObject.y);
-                //addPointToCanvas(punto);
                 var canvas = document.getElementById("canvas");
                 var ctx = canvas.getContext("2d");
                 ctx.beginPath();
@@ -52,16 +52,20 @@ var app = (function () {
     };
 
 
-    var flag = false;
-    return {
 
+    return {
         init: function () {
             var can = document.getElementById("canvas");
             //_funcListener();
-            can.addEventListener("click", function (evt) {
-                var mousePos = getMousePosition(evt);
-                app.publishPoint(mousePos.x, mousePos.y);
-            });
+            idBlueprint = $("#numDib").val();
+            alert(idBlueprint);
+            if (idBlueprint ){
+                can.addEventListener("click", function (evt) {
+                    alert("entrroooo");
+                    var mousePos = getMousePosition(evt);
+                    app.publishPoint(mousePos.x, mousePos.y);
+                })
+            };
             //websocket connection
             connectAndSubscribe(addPointToCanvas);
         },
@@ -72,7 +76,7 @@ var app = (function () {
             //addPointToCanvas(pt);
 
             //publicar el evento
-            stompClient.send("/topic/newpoint", {}, JSON.stringify(pt));
+            stompClient.send("/topic/newpoint."+idBlueprint, {}, JSON.stringify(pt));
         },
 
         disconnect: function () {
