@@ -51,10 +51,10 @@ var app = (function () {
                 var anterior = null;
                 var theObject = JSON.parse(eventbody.body);
                 var c2 = canvas.getContext('2d');
-                c2.clearRect(0, 0, 800, 600);
+
                 c2.fillStyle = '#f00';
                 c2.beginPath();
-                theObject.map(function (value ){
+                theObject.map(function (value, index ){
                     if (anterior == null ){
                         anterior = value;
                         c2.moveTo(anterior.x, anterior.y);
@@ -69,24 +69,35 @@ var app = (function () {
                 c2.fill();
             })
         });
-
+        app.disconnect();
     };
 
 
-
+    var fun = null;
+    var flag = false;
     return {
         init: function () {
+
             var can = document.getElementById("canvas");
             //_funcListener();
+            var c2 = canvas.getContext('2d');
+            c2.clearRect(0, 0, 800, 600);
             idBlueprint = $("#numDib").val();
             if (idBlueprint != null ){
-                can.addEventListener("click", function (evt) {
+                if(flag == true){
+                    flag = true;
+                    can.removeEventListener("click",fun)
+                }
+                can.addEventListener("click", fun = function (evt) {
                     var mousePos = getMousePosition(evt);
                     app.publishPoint(mousePos.x, mousePos.y);
-                })
+                });
+                flag = true;
+
             };
             //websocket connection
             connectAndSubscribe();
+
         },
 
         publishPoint: function(px,py){

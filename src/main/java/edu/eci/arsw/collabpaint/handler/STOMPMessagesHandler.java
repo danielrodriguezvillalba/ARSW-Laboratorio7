@@ -21,10 +21,10 @@ public class STOMPMessagesHandler {
     SimpMessagingTemplate msgt;
     Map<String,ArrayList<Point>> valores =new  ConcurrentHashMap <String,ArrayList<Point>>();
     ArrayList<Point> lisPoligonos;
-    String ant ;
     @MessageMapping("/newpoint.{numdibujo}")
 
-    public synchronized void handlePointEvent(Point pt, @DestinationVariable String numdibujo)  {
+    public void handlePointEvent(Point pt, @DestinationVariable String numdibujo)  {
+        System.out.println(valores.containsKey(numdibujo));
         if (!valores.containsKey(numdibujo)){
             ArrayList <Point> temp = new ArrayList<Point>();
             temp.add(pt);
@@ -34,9 +34,23 @@ public class STOMPMessagesHandler {
         else{
             lisPoligonos = valores.get(numdibujo);
             lisPoligonos.add(pt);
+            System.out.println(lisPoligonos.size());
             valores.replace(numdibujo,lisPoligonos);
-            if(lisPoligonos.size() > 3){
-                msgt.convertAndSend("/topic/newpolygon."+numdibujo, lisPoligonos);
+            if(lisPoligonos.size() %4 == 0){
+                ArrayList<Point> temp = new ArrayList<>();
+                for (int i = 1; i<lisPoligonos.size()+1; i++){
+                    if(i % 4 == 0 && i != 0){
+                        temp.add(lisPoligonos.get(i-1));
+                        msgt.convertAndSend("/topic/newpolygon."+numdibujo, temp);
+                        //System.out.println("ENTROOOOOOO");
+                        temp = new ArrayList<>();
+                    }
+                    else{
+                        temp.add(lisPoligonos.get(i-1));
+                    }
+                }
+
+
             }
             else {
                 System.out.println("Nuevo punto recibido en el servidor!:"+pt);
