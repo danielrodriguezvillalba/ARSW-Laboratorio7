@@ -24,7 +24,6 @@ public class STOMPMessagesHandler {
     @MessageMapping("/newpoint.{numdibujo}")
 
     public void handlePointEvent(Point pt, @DestinationVariable String numdibujo)  {
-        System.out.println(valores.containsKey(numdibujo));
         if (!valores.containsKey(numdibujo)){
             ArrayList <Point> temp = new ArrayList<Point>();
             temp.add(pt);
@@ -34,7 +33,6 @@ public class STOMPMessagesHandler {
         else{
             lisPoligonos = valores.get(numdibujo);
             lisPoligonos.add(pt);
-            System.out.println(lisPoligonos.size());
             valores.replace(numdibujo,lisPoligonos);
             if(lisPoligonos.size() %4 == 0){
                 ArrayList<Point> temp = new ArrayList<>();
