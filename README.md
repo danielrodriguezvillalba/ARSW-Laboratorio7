@@ -84,7 +84,7 @@ Ajuste la aplicación anterior para que pueda manejar más de un dibujo a la vez
 
 2. Modifique la aplicación para que, en lugar de conectarse y suscribirse automáticamente (en la función init()), lo haga a través de botón 'conectarse'. Éste, al oprimirse debe realizar la conexión y suscribir al cliente a un tópico que tenga un nombre dinámico, asociado el identificador ingresado, por ejemplo: /topic/newpoint.25, topic/newpoint.80, para los dibujos 25 y 80 respectivamente.
 
-![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio7/blob/master/imagenes/connectBoton.PNG)
+![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio7/blob/master/imagenes/connectBotton.PNG)
 
 3. De la misma manera, haga que las publicaciones se realicen al tópico asociado al identificador ingresado por el usuario.
 
@@ -170,4 +170,4 @@ public void handlePointEvent(Point pt, @DestinationVariable String numdibujo)  {
 ```
 
 La prueba del funcionamiento de esta funcion se presenta a continuacion :
-![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio7/blob/master/imagenes/poligon.PNG)
+![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio7/blob/master/imagenes/Poligon.PNG)
