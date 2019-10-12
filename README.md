@@ -27,7 +27,7 @@ var theObject = JSON.parse(eventbody.body);
 
 4. Ingrese los datos, ejecute la acción del botón, y verifique que en todas la pestañas se haya lanzado la alerta con los datos ingresados.
 
-![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio6/blob/master/imagenes/alert.PNG)
+![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio7/blob/master/imagenes/alert.PNG)
 
 ### Parte II
 
@@ -72,7 +72,7 @@ stompClient.subscribe('/topic/newpoint', function (eventbody) {
 
 2. Ejecute su aplicación en varios navegadores (y si puede en varios computadores, accediendo a la aplicación mendiante la IP donde corre el servidor). Compruebe que a medida que se dibuja un punto, el mismo es replicado en todas las instancias abiertas de la aplicación.
 
-![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio6/blob/master/imagenes/circles.PNG)
+![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio7/blob/master/imagenes/circles.PNG)
 
 ### Parte III
 
@@ -80,11 +80,11 @@ Ajuste la aplicación anterior para que pueda manejar más de un dibujo a la vez
 
 1. Agregue un campo en la vista, en el cual el usuario pueda ingresar un número. El número corresponderá al identificador del dibujo que se creará.
 
-![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio6/blob/master/imagenes/inputid.PNG)
+![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio7/blob/master/imagenes/inputid.PNG)
 
 2. Modifique la aplicación para que, en lugar de conectarse y suscribirse automáticamente (en la función init()), lo haga a través de botón 'conectarse'. Éste, al oprimirse debe realizar la conexión y suscribir al cliente a un tópico que tenga un nombre dinámico, asociado el identificador ingresado, por ejemplo: /topic/newpoint.25, topic/newpoint.80, para los dibujos 25 y 80 respectivamente.
 
-![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio6/blob/master/imagenes/connectBoton.PNG)
+![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio7/blob/master/imagenes/connectBoton.PNG)
 
 3. De la misma manera, haga que las publicaciones se realicen al tópico asociado al identificador ingresado por el usuario.
 
@@ -127,7 +127,7 @@ public class STOMPMessagesHandler {
 
 2. Ajuste su cliente para que, en lugar de publicar los puntos en el tópico /topic/newpoint.{numdibujo}, lo haga en /app/newpoint.{numdibujo}. Ejecute de nuevo la aplicación y rectifique que funcione igual, pero ahora mostrando en el servidor los detalles de los puntos recibidos.
 
-![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio6/blob/master/imagenes/dibuTer.PNG)
+![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio7/blob/master/imagenes/dibuTer.PNG)
 
 3. Una vez rectificado el funcionamiento, se quiere aprovechar este 'interceptor' de eventos para cambiar ligeramente la funcionalidad:
 
@@ -170,4 +170,4 @@ public void handlePointEvent(Point pt, @DestinationVariable String numdibujo)  {
 ```
 
 La prueba del funcionamiento de esta funcion se presenta a continuacion :
-![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio6/blob/master/imagenes/poligon.PNG)
+![imagen](https://github.com/danielrodriguezvillalba/ARSW-Laboratorio7/blob/master/imagenes/poligon.PNG)
